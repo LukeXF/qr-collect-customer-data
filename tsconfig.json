@@ -1,0 +1,43 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react",
+		"baseUrl": "./",
+		"paths": {
+			"@helpers": ["src/helpers/index.ts"],
+			"@components/*": ["src/components/*"],
+			"@helpers/*": ["src/helpers/*"],
+			"@images/*": ["src/images/*"],
+			"@styles/*": ["src/styles/*"],
+			"@fonts/*": ["src/fonts/*"],
+			"@views/*": ["src/views/*"],
+			"@store/*": ["src/store/*"],
+			"@store": ["src/store/index.ts"],
+			"@models/*": ["src/models/*"],
+			"@data/*": ["src/data/*"],
+			"@models": ["src/models/*"],
+			"@assets/*": ["src/assets/*"],
+			"@globalStyles": ["src/globalStyles.ts"],
+			"@theme/*": ["src/theme/*"]
+		},
+		"noImplicitAny": false,
+		"typeAcquisition": {
+			"enable": true
+		}
+	},
+	"include": ["src"]
+}

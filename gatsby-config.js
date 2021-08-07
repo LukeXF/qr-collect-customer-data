@@ -41,7 +41,6 @@ module.exports = {
 					'@store': path.resolve(__dirname, 'src/store'),
 					'@theme': path.resolve(__dirname, 'src/theme'),
 					'@data': path.resolve(__dirname, 'src/data'),
-					'@globalStyles': path.resolve(__dirname, 'src/globalStyles.ts'),
 				},
 				extensions: [],
 			},
