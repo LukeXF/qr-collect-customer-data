@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es2016",
+		"jsx": "preserve",
+		"baseUrl": "./",
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@helpers/*": ["src/helpers/*"],
+			"@images/*": ["src/media/*"],
+			"@styles/*": ["src/styles/*"],
+			"@fonts/*": ["src/fonts/*"],
+			"@views/*": ["src/views/*"],
+			"@models/*": ["src/models/*"],
+			"@store": ["src/store/index.ts"],
+			"@store/*": ["src/store/*"],
+			"@assets/*": ["src/assets/*"],
+			"@globalStyles": ["src/globalStyles.ts"],
+			"@theme/*": ["src/theme/*"]
+		}
+	},
+	"exclude": ["node_modules", "**/node_modules/*"]
+}
