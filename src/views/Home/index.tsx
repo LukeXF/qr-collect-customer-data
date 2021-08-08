@@ -7,7 +7,7 @@ import {Formik, Form, Field} from 'formik';
 import axios from 'axios';
 // @ts-ignore
 import Logo from "@images/logo.jpeg";
-import { TextField } from 'formik-material-ui';
+import {TextField} from 'formik-material-ui';
 
 import {Typography} from '@material-ui/core';
 import {useSnackbar} from '@components/Snackbar';
@@ -27,7 +27,9 @@ const Home: React.FC = () => {
     const handleSubmit = async (values) => {
         console.log('test')
         try {
-            const {data} = await axios.post('google.com', values);
+            const {data} = await axios.post('/', encode({"form-name": "contact-form", ...values}),
+                {headers: {"Content-Type": "application/x-www-form-urlencoded"}},
+            );
             openSnackbar(`Successfully logged in, welcome ${values.name}`);
         } catch (error) {
             openSnackbar(error?.errorMessage ?? 'An error occurred attempting to log in.', 'error');
@@ -38,7 +40,7 @@ const Home: React.FC = () => {
         email: string;
         // password: string
     } = {
-        email: 't',
+        email: '',
         // password: ''
     };
 
@@ -60,11 +62,12 @@ const Home: React.FC = () => {
             >
                 {({isSubmitting, setFieldValue, errors, values}) => (
                     <Form
-                        // className="form"
-                        // method="post"
-                        // data-netlify="true"
-                        // netlify-honeypot="bot-field"
-                        // encType="application/x-www-form-urlencoded"
+                        className="form"
+                        method="post"
+                        data-netlify="true"
+                        name="contact-form"
+                        netlify-honeypot="bot-field"
+                        encType="application/x-www-form-urlencoded"
                     >
                         {console.log({errors, values})}
                         {values.email}
