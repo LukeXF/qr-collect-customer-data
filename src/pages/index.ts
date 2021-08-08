@@ -1,2 +1,2 @@
-import Home from '@views/Index';
+import Home from '@views/Home';
 export default Home;
