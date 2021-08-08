@@ -8,11 +8,11 @@ import axios from 'axios';
 // @ts-ignore
 import Logo from "@images/logo.jpeg";
 import {TextField} from 'formik-material-ui';
-
 import {Typography} from '@material-ui/core';
 import {useSnackbar} from '@components/Snackbar';
 import styles from './styles';
 import {Link} from "gatsby";
+import {Helmet} from "react-helmet"
 
 const encode = (data) => {
     return Object.keys(data)
@@ -61,8 +61,17 @@ const Home: React.FC = () => {
         // password: Yup.string().required('Password is required'),
     });
 
+    const SEO: React.FC = () =>
+        <Helmet>
+            <meta charSet="utf-8"/>
+            <title>A To B Tyres - Sign Up</title>
+            <meta name="description" content="Send your contact details to A To B Tyres"/>
+        </Helmet>
+
+
     if (complete) {
         return <Container css={styles(theme)} maxWidth="sm">
+            <SEO/>
             <img src={Logo} alt="logo" className="logo"/>
             <Typography
                 gutterBottom
@@ -70,7 +79,7 @@ const Home: React.FC = () => {
                 component="h1"
                 align="center"
             >
-               Thank you for sending your details!
+                Thank you for sending your details!
 
             </Typography>
             <Typography
@@ -81,20 +90,21 @@ const Home: React.FC = () => {
             >
                 You can now close this page
             </Typography>
-                <Box mt={2}/>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    component={Link}
-                    to={"https://atobtyres.co.uk"}
-                >
-                    View main website
-                </Button>
+            <Box mt={2}/>
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                component={Link}
+                to={"https://atobtyres.co.uk"}
+            >
+                View main website
+            </Button>
         </Container>
     }
     return (
         <Container css={styles(theme)} maxWidth="sm">
+            <SEO/>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
