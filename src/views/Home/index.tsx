@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useLocation} from '@reach/router';
-import {Link, Container, Divider, Button} from '@material-ui/core';
+import {Container, Button, Box} from '@material-ui/core';
 import * as Yup from 'yup';
 import {useTheme} from '@material-ui/core/styles';
 import {Formik, Form, Field} from 'formik';
@@ -12,6 +12,7 @@ import {TextField} from 'formik-material-ui';
 import {Typography} from '@material-ui/core';
 import {useSnackbar} from '@components/Snackbar';
 import styles from './styles';
+import {Link} from "gatsby";
 
 const encode = (data) => {
     return Object.keys(data)
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
     const theme = useTheme();
     const location = useLocation();
     const [openSnackbar] = useSnackbar();
+    const [complete, setComplete] = useState<boolean>(false)
 
     const handleSubmit = async (values) => {
         console.log('test')
@@ -30,16 +32,23 @@ const Home: React.FC = () => {
             const {data} = await axios.post('/', encode({"form-name": "contact-form", ...values}),
                 {headers: {"Content-Type": "application/x-www-form-urlencoded"}},
             );
-            openSnackbar(`Successfully logged in, welcome ${values.name}`);
+            openSnackbar(`Thanks ${values.firstName}, we have received your details!`);
+            setComplete(true);
         } catch (error) {
-            openSnackbar(error?.errorMessage ?? 'An error occurred attempting to log in.', 'error');
+            openSnackbar(error?.errorMessage ?? 'An error occurred attempting to send details, please tell A to B Tyres.', 'error');
         }
     };
 
     const initialValues: {
+        firstName: string;
+        lastName: string;
+        carReg?: string;
         email: string;
         // password: string
     } = {
+        firstName: '',
+        lastName: '',
+        carReg: '',
         email: '',
         // password: ''
     };
@@ -52,6 +61,38 @@ const Home: React.FC = () => {
         // password: Yup.string().required('Password is required'),
     });
 
+    if (complete) {
+        return <Container css={styles(theme)} maxWidth="sm">
+            <img src={Logo} alt="logo" className="logo"/>
+            <Typography
+                gutterBottom
+                variant="h5"
+                component="h1"
+                align="center"
+            >
+               Thank you for sending your details!
+
+            </Typography>
+            <Typography
+                gutterBottom
+                variant="h6"
+                component="h2"
+                align="center"
+            >
+                You can now close this page
+            </Typography>
+                <Box mt={2}/>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    component={Link}
+                    to={"https://atobtyres.co.uk"}
+                >
+                    View main website
+                </Button>
+        </Container>
+    }
     return (
         <Container css={styles(theme)} maxWidth="sm">
             <Formik
@@ -70,7 +111,6 @@ const Home: React.FC = () => {
                         encType="application/x-www-form-urlencoded"
                     >
                         {console.log({errors, values})}
-                        {values.email}
                         <img src={Logo} alt="logo" className="logo"/>
                         <Typography
                             gutterBottom
@@ -82,11 +122,36 @@ const Home: React.FC = () => {
                         </Typography>
                         <Field
                             component={TextField}
-                            type="email"
-                            name="email"
+                            type="text"
+                            name="firstName"
+                            label="First Name"
                             fullWidth
                             margin="normal"
-                        />
+                            required
+                        /> <Field
+                        component={TextField}
+                        type="text"
+                        name="lastName"
+                        label="Last Name"
+                        fullWidth
+                        margin="normal"
+                        required
+                    /> <Field
+                        component={TextField}
+                        type="email"
+                        name="email"
+                        label="Email Address"
+                        fullWidth
+                        margin="normal"
+                        required
+                    /> <Field
+                        component={TextField}
+                        type="text"
+                        name="carReg"
+                        label="Vehicle Reg Number"
+                        fullWidth
+                        margin="normal"
+                    />
                         <Button
                             type="submit"
                             fullWidth
@@ -94,7 +159,6 @@ const Home: React.FC = () => {
                         >
                             Continue
                         </Button>
-
                     </Form>
                 )}
             </Formik>

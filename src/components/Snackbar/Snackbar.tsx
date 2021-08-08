@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { Alert } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { default as MuiSnackbar, SnackbarOrigin } from '@material-ui/core/Snackbar';
 import { Color } from '@material-ui/lab';
 import { useTheme } from '@material-ui/core/styles';
